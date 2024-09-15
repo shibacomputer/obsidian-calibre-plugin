@@ -58,34 +58,6 @@ export class CalibreSettingTab extends PluginSettingTab {
 				}));
 		
 		new Setting(containerEl)
-		  .setName('Username')
-		  .setDesc('Your Calibre server username')
-		  .addText(text => {
-		    text.inputEl.size = 25;
-		    text
-		      .setPlaceholder('Enter your username')
-		      .setValue(this.plugin.settings.username || '')
-		      .onChange(debounce(async (value) => {
-		        this.plugin.settings.username = value;
-		        await this.plugin.saveData(this.plugin.settings);
-		      }, DEBOUNCE_TIMEOUT));
-		  });
-
-		new Setting(containerEl)
-		  .setName('Password')
-		  .setDesc('Your Calibre server password')
-		  .addSecret(text => {
-		    text.inputEl.size = 25;
-		    text
-		      .setPlaceholder('Enter your password')
-		      .setValue(this.plugin.settings.password || '')
-		      .onChange(debounce(async (value) => {
-		        this.plugin.settings.password = value;
-		        await this.plugin.saveData(this.plugin.settings);
-		      }, DEBOUNCE_TIMEOUT));
-		  });
-
-		new Setting(containerEl)
 			.setName("View Display Text")
 			.setDesc("The title of calibre view.")
 			.addText(text => {
@@ -128,6 +100,34 @@ export class CalibreSettingTab extends PluginSettingTab {
 					this.plugin.settings.ribbonIcon = value;
 					this.plugin.saveData(this.plugin.settings);
 				}));
+
+		new Setting(containerEl)
+		  .setName('Username')
+		  .setDesc('Your Calibre server username')
+		  .addText(text => {
+		    text.inputEl.size = 25;
+		    text
+		      .setPlaceholder('Enter your username')
+		      .setValue(this.plugin.settings.username || '')
+		      .onChange(debounce(async (value) => {
+		        this.plugin.settings.username = value;
+		        await this.plugin.saveData(this.plugin.settings);
+		      }, DEBOUNCE_TIMEOUT));
+		  });
+		
+		new Setting(containerEl)
+		  .setName('Password')
+		  .setDesc('Your Calibre server password')
+		  .addSecret(text => {
+		    text.inputEl.size = 25;
+		    text
+		      .setPlaceholder('Enter your password')
+		      .setValue(this.plugin.settings.password || '')
+		      .onChange(debounce(async (value) => {
+		        this.plugin.settings.password = value;
+		        await this.plugin.saveData(this.plugin.settings);
+		      }, DEBOUNCE_TIMEOUT));
+		  });
 
 		if (Platform.isDesktopApp) {
 			const donation = containerEl.createDiv({ cls: "calibre-donation" });
